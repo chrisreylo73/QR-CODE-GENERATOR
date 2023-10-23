@@ -10,16 +10,27 @@ import java.nio.file.Paths;
 
 public class QRCodeGenerator {
 
-  public void gen() throws WriterException, IOException {
-    String data = "https://github.com/chrisreylo73";
-    String path = "C:/Users/chris/Desktop/test.jpg";
+  public void gen(String data, String path, String name, String format)
+    throws WriterException, IOException {
+    try {} catch (Exception e) {
+      System.out.println("ERROR OCCURRED: " + e);
+    }
     BitMatrix matrix = new MultiFormatWriter()
       .encode(data, BarcodeFormat.QR_CODE, 500, 500);
-    MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
+    MatrixToImageWriter.writeToPath(
+      matrix,
+      format,
+      Paths.get(path + "/" + name + "." + format)
+    );
   }
 
   QRCodeGenerator() throws WriterException, IOException {
-    gen();
+    String data = "https://github.com/chrisreylo73";
+    String path =
+      "C:/Users/chris/Desktop/QR CODE GENERATOR/QR-CODE-GENERATOR/qrc-gen/src/main/resources/QRCodes";
+    String name = "test";
+    String format = "jpg";
+    gen(data, path, name, format);
     System.out.println("Hello World!");
   }
 }
