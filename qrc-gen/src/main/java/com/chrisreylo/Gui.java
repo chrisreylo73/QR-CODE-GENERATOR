@@ -9,13 +9,6 @@ import javax.swing.border.LineBorder;
 
 public class Gui {
 
-  //   private final int frameWidth = 500;
-  //   private final int frameHeight = 500;
-  //   private final JFrame frame;
-  //   private final JPanel mainPanel;
-  //   private final JButton generateButton;
-  //   private final JTextField textField;
-  //   private final JComboBox<String> dropdown;
   private final JFrame frame;
   private final JPanel mainPanel;
   private final JTextField nameField;
@@ -23,6 +16,7 @@ public class Gui {
   private final JTextField dataField; // New data text input
   private final JComboBox<String> fileTypeDropdown;
   private final JButton generateButton;
+  LineBorder borderColor = new LineBorder(new Color(20, 21, 31));
 
   public Gui() {
     frame = new JFrame("File Generator");
@@ -32,7 +26,7 @@ public class Gui {
     frame.setLocationRelativeTo(null);
 
     mainPanel = new JPanel();
-    mainPanel.setBackground(Color.DARK_GRAY);
+    mainPanel.setBackground(new Color(40, 42, 58));
     mainPanel.setLayout(new GridBagLayout());
 
     GridBagConstraints constraints = new GridBagConstraints();
@@ -44,22 +38,25 @@ public class Gui {
     nameLabel.setForeground(Color.WHITE);
     nameField = new JTextField(25); // Adjust width as needed
     nameField.setPreferredSize(new Dimension(200, 30));
-    nameField.setBackground(Color.BLACK);
+    nameField.setBackground(new Color(30, 31, 43));
     nameField.setForeground(Color.WHITE);
+    nameField.setBorder(borderColor);
 
     JLabel dataLabel = new JLabel("Data:");
     dataLabel.setForeground(Color.WHITE);
     dataField = new JTextField(25);
     dataField.setPreferredSize(new Dimension(200, 30)); // Adjust width as needed
-    dataField.setBackground(Color.BLACK);
+    dataField.setBackground(new Color(30, 31, 43));
     dataField.setForeground(Color.WHITE);
+    dataField.setBorder(borderColor);
 
     JLabel pathLabel = new JLabel("Path:");
     pathLabel.setForeground(Color.WHITE);
     pathField = new JTextField(25); // Adjust width as needed
     pathField.setPreferredSize(new Dimension(200, 30));
-    pathField.setBackground(Color.BLACK);
+    pathField.setBackground(new Color(30, 31, 43));
     pathField.setForeground(Color.WHITE);
+    pathField.setBorder(borderColor);
 
     // Create a dropdown menu for selecting File Type
     JLabel fileTypeLabel = new JLabel("File Type:");
@@ -67,13 +64,16 @@ public class Gui {
     String[] fileTypes = { "JPG", "PNG", "PDF" };
     fileTypeDropdown = new JComboBox<>(fileTypes);
     fileTypeDropdown.setPreferredSize(new Dimension(200, 30));
-    fileTypeDropdown.setBackground(Color.BLACK);
+    fileTypeDropdown.setBackground(new Color(30, 31, 43));
     fileTypeDropdown.setForeground(Color.WHITE);
+    fileTypeDropdown.setBorder(borderColor);
 
     // Create the "Generate" button
     generateButton = new JButton("Generate");
-    generateButton.setBackground(Color.BLACK);
+    generateButton.setBackground(new Color(30, 31, 43));
+    generateButton.setPreferredSize(new Dimension(200, 30));
     generateButton.setForeground(Color.WHITE);
+    generateButton.setBorder(borderColor);
 
     // Add components to the mainPanel with constraints
     constraints.gridx = 0;
@@ -115,13 +115,13 @@ public class Gui {
         @Override
         public void actionPerformed(ActionEvent e) {
           String name = nameField.getText();
-          String path = pathField.getText();
           String data = dataField.getText();
+          String path = pathField.getText();
           String fileType = (String) fileTypeDropdown.getSelectedItem();
           // Add your file generation logic here
           System.out.println("Name: " + name);
-          System.out.println("Path: " + path);
           System.out.println("Data: " + data);
+          System.out.println("Path: " + path);
           System.out.println("File Type: " + fileType);
         }
       }
