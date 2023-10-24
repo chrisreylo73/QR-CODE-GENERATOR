@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 
 public class QRCodeGenerator {
 
+  public Gui gui;
+
   public void gen(String data, String path, String name, String format)
     throws WriterException, IOException {
     try {} catch (Exception e) {
@@ -25,6 +27,7 @@ public class QRCodeGenerator {
   }
 
   QRCodeGenerator() throws WriterException, IOException {
+    gui = new Gui();
     String data = "https://github.com/chrisreylo73";
     String path =
       "C:/Users/chris/Desktop/QR CODE GENERATOR/QR-CODE-GENERATOR/qrc-gen/src/main/resources/QRCodes";
