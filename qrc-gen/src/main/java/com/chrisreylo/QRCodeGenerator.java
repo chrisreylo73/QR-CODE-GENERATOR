@@ -29,12 +29,12 @@ public class QRCodeGenerator {
 
   QRCodeGenerator() throws WriterException, IOException {
     gui = new Gui(this);
-    String data = "https://github.com/chrisreylo73";
-    String path =
-      "C:/Users/chris/Desktop/QR CODE GENERATOR/QR-CODE-GENERATOR/qrc-gen/src/main/resources/QRCodes";
-    String name = "test";
-    String format = "jpg";
-    gen(data, path, name, format);
-    System.out.println("Hello World!");
+    // String data = "https://github.com/chrisreylo73";
+    // String path =
+    //   "C:/Users/chris/Desktop/QR CODE GENERATOR/QR-CODE-GENERATOR/qrc-gen/src/main/resources/QRCodes";
+    // String name = "test";
+    // String format = "jpg";
+    // gen(data, path, name, format);
+    System.out.println("Generated!");
   }
 }

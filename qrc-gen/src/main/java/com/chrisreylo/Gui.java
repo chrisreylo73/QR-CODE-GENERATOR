@@ -18,12 +18,13 @@ public class Gui {
   private final JTextField dataField; // New data text input
   private final JComboBox<String> fileTypeDropdown;
   private final JButton generateButton;
+  private final JButton browseButton;
   LineBorder borderColor = new LineBorder(new Color(20, 21, 31));
 
   public Gui(QRCodeGenerator generator) {
     frame = new JFrame("File Generator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(500, 250);
+    frame.setSize(700, 280);
     frame.setLayout(new BorderLayout());
     frame.setLocationRelativeTo(null);
     frame.setResizable(false);
@@ -78,6 +79,14 @@ public class Gui {
     generateButton.setForeground(Color.WHITE);
     generateButton.setBorder(borderColor);
 
+    //Create the browse button
+
+    browseButton = new JButton("Browse");
+    browseButton.setBackground(new Color(30, 31, 43));
+    browseButton.setPreferredSize(new Dimension(100, 30));
+    browseButton.setForeground(Color.WHITE);
+    browseButton.setBorder(borderColor);
+
     // Add components to the mainPanel with constraints
     constraints.gridx = 0;
     constraints.gridy = 0;
@@ -107,10 +116,30 @@ public class Gui {
     constraints.gridx = 1;
     mainPanel.add(fileTypeDropdown, constraints);
 
-    constraints.gridwidth = 2;
+    constraints.gridx = 2; // Adjust the grid position for the "Browse" button
+    constraints.gridy = 2;
+    mainPanel.add(browseButton, constraints);
+
+    constraints.gridwidth = 2; // Reset the gridwidth to 2 for the "Generate" button
     constraints.gridx = 0;
     constraints.gridy = 4;
     mainPanel.add(generateButton, constraints);
+
+    // Add an action listener to the "Browse" button
+    browseButton.addActionListener(
+      new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          JFileChooser fileChooser = new JFileChooser();
+          fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+          int result = fileChooser.showOpenDialog(frame);
+          if (result == JFileChooser.APPROVE_OPTION) {
+            pathField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+          }
+        }
+      }
+    );
 
     // Add an action listener to the "Generate" button
     generateButton.addActionListener(
