@@ -4,6 +4,8 @@ import com.google.zxing.WriterException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
@@ -45,6 +47,7 @@ public class Gui {
     nameField.setBackground(new Color(30, 31, 43));
     nameField.setForeground(Color.WHITE);
     nameField.setBorder(borderColor);
+    nameField.setCaretColor(Color.WHITE);
 
     JLabel dataLabel = new JLabel("Data:");
     dataLabel.setForeground(Color.WHITE);
@@ -53,6 +56,7 @@ public class Gui {
     dataField.setBackground(new Color(30, 31, 43));
     dataField.setForeground(Color.WHITE);
     dataField.setBorder(borderColor);
+    dataField.setCaretColor(Color.WHITE);
 
     JLabel pathLabel = new JLabel("Path:");
     pathLabel.setForeground(Color.WHITE);
@@ -61,7 +65,7 @@ public class Gui {
     pathField.setBackground(new Color(30, 31, 43));
     pathField.setForeground(Color.WHITE);
     pathField.setBorder(borderColor);
-
+    pathField.setCaretColor(Color.WHITE);
     // Create a dropdown menu for selecting File Type
     JLabel fileTypeLabel = new JLabel("File Type:");
     fileTypeLabel.setForeground(Color.WHITE);
@@ -71,7 +75,6 @@ public class Gui {
     fileTypeDropdown.setBackground(new Color(30, 31, 43));
     fileTypeDropdown.setForeground(Color.WHITE);
     fileTypeDropdown.setBorder(borderColor);
-
     // Create the "Generate" button
     generateButton = new JButton("Generate");
     generateButton.setBackground(new Color(30, 31, 43));
@@ -124,7 +127,6 @@ public class Gui {
     constraints.gridx = 0;
     constraints.gridy = 4;
     mainPanel.add(generateButton, constraints);
-
     // Add an action listener to the "Browse" button
     browseButton.addActionListener(
       new ActionListener() {
