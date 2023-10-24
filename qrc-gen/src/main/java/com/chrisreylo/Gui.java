@@ -1,8 +1,10 @@
 package com.chrisreylo;
 
+import com.google.zxing.WriterException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -18,12 +20,13 @@ public class Gui {
   private final JButton generateButton;
   LineBorder borderColor = new LineBorder(new Color(20, 21, 31));
 
-  public Gui() {
+  public Gui(QRCodeGenerator generator) {
     frame = new JFrame("File Generator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(400, 250);
+    frame.setSize(500, 250);
     frame.setLayout(new BorderLayout());
     frame.setLocationRelativeTo(null);
+    frame.setResizable(false);
 
     mainPanel = new JPanel();
     mainPanel.setBackground(new Color(40, 42, 58));
@@ -37,7 +40,7 @@ public class Gui {
     JLabel nameLabel = new JLabel("Name:");
     nameLabel.setForeground(Color.WHITE);
     nameField = new JTextField(25); // Adjust width as needed
-    nameField.setPreferredSize(new Dimension(200, 30));
+    nameField.setPreferredSize(new Dimension(400, 30));
     nameField.setBackground(new Color(30, 31, 43));
     nameField.setForeground(Color.WHITE);
     nameField.setBorder(borderColor);
@@ -45,7 +48,7 @@ public class Gui {
     JLabel dataLabel = new JLabel("Data:");
     dataLabel.setForeground(Color.WHITE);
     dataField = new JTextField(25);
-    dataField.setPreferredSize(new Dimension(200, 30)); // Adjust width as needed
+    dataField.setPreferredSize(new Dimension(400, 30)); // Adjust width as needed
     dataField.setBackground(new Color(30, 31, 43));
     dataField.setForeground(Color.WHITE);
     dataField.setBorder(borderColor);
@@ -53,7 +56,7 @@ public class Gui {
     JLabel pathLabel = new JLabel("Path:");
     pathLabel.setForeground(Color.WHITE);
     pathField = new JTextField(25); // Adjust width as needed
-    pathField.setPreferredSize(new Dimension(200, 30));
+    pathField.setPreferredSize(new Dimension(400, 30));
     pathField.setBackground(new Color(30, 31, 43));
     pathField.setForeground(Color.WHITE);
     pathField.setBorder(borderColor);
@@ -61,9 +64,9 @@ public class Gui {
     // Create a dropdown menu for selecting File Type
     JLabel fileTypeLabel = new JLabel("File Type:");
     fileTypeLabel.setForeground(Color.WHITE);
-    String[] fileTypes = { "JPG", "PNG", "PDF" };
+    String[] fileTypes = { "JPG", "PNG" };
     fileTypeDropdown = new JComboBox<>(fileTypes);
-    fileTypeDropdown.setPreferredSize(new Dimension(200, 30));
+    fileTypeDropdown.setPreferredSize(new Dimension(400, 30));
     fileTypeDropdown.setBackground(new Color(30, 31, 43));
     fileTypeDropdown.setForeground(Color.WHITE);
     fileTypeDropdown.setBorder(borderColor);
@@ -114,15 +117,20 @@ public class Gui {
       new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          String name = nameField.getText();
-          String data = dataField.getText();
-          String path = pathField.getText();
-          String fileType = (String) fileTypeDropdown.getSelectedItem();
-          // Add your file generation logic here
-          System.out.println("Name: " + name);
-          System.out.println("Data: " + data);
-          System.out.println("Path: " + path);
-          System.out.println("File Type: " + fileType);
+          try {
+            String name = nameField.getText();
+            String data = dataField.getText();
+            String path = pathField.getText();
+            String fileType = (String) fileTypeDropdown.getSelectedItem();
+            // Add your file generation logic here
+            System.out.println("Name: " + name);
+            System.out.println("Data: " + data);
+            System.out.println("Path: " + path);
+            System.out.println("File Type: " + fileType);
+            generator.gen(data, path, name, fileType.toLowerCase());
+          } catch (WriterException | IOException e1) {
+            e1.printStackTrace();
+          }
         }
       }
     );

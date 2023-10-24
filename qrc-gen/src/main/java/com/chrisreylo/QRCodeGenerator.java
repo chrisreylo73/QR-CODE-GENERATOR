@@ -14,20 +14,21 @@ public class QRCodeGenerator {
 
   public void gen(String data, String path, String name, String format)
     throws WriterException, IOException {
-    try {} catch (Exception e) {
+    try {
+      BitMatrix matrix = new MultiFormatWriter()
+        .encode(data, BarcodeFormat.QR_CODE, 500, 500);
+      MatrixToImageWriter.writeToPath(
+        matrix,
+        format,
+        Paths.get(path + "/" + name + "." + format)
+      );
+    } catch (Exception e) {
       System.out.println("ERROR OCCURRED: " + e);
     }
-    BitMatrix matrix = new MultiFormatWriter()
-      .encode(data, BarcodeFormat.QR_CODE, 500, 500);
-    MatrixToImageWriter.writeToPath(
-      matrix,
-      format,
-      Paths.get(path + "/" + name + "." + format)
-    );
   }
 
   QRCodeGenerator() throws WriterException, IOException {
-    gui = new Gui();
+    gui = new Gui(this);
     String data = "https://github.com/chrisreylo73";
     String path =
       "C:/Users/chris/Desktop/QR CODE GENERATOR/QR-CODE-GENERATOR/qrc-gen/src/main/resources/QRCodes";
